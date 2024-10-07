@@ -20,13 +20,13 @@ jobs:
 
       - name: Download CNES Report
         run: |
-          curl -X GET -u sqp_b6f45c34804349735cd4a0f84d14d800703e8f90: "http://13.201.109.77:9000//api/cnesreport/report?key=test&format=pdf" --output cnes-report.pdf
+          curl -X GET -u sqp_b6f45c34804349735cd4a0f84d14d800703e8f90: "http://13.201.109.77:9000//api/cnesreport/report?key=test&format=docx" --output cnes-report.docx
 
       - name: Upload CNES Report
         uses: actions/upload-artifact@v3
         with:
           name: cnes-report
-          path: cnes-report.pdf
+          path: cnes-report.docx
           
       - name: Send email on success or failure
         if: always()  # ensures that this step runs no matter what
@@ -49,4 +49,4 @@ jobs:
           to: ${{ secrets.RECIPIENT_EMAIL }}
           from: ${{ secrets.SMTP_USERNAME }}
           secure: true
-          attachments: cnes-report.pdf
+          attachments: cnes-report.docx
