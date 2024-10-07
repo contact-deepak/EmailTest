@@ -18,19 +18,15 @@ jobs:
 
     # Always send the email regardless of the outcome
 
-      - name: Download SonarQube Report (JSON)
+      - name: Download CNES Report
         run: |
-          curl -u sqp_b6f45c34804349735cd4a0f84d14d800703e8f90: \
-          "http://13.201.109.77:9000/api/issues/search?projectKey=test" \
-          -o sonarqube-report.json
-      - name: Prettify JSON Report
-        run: |
-          cat sonarqube-report.json | jq '.' > pretty-sonarqube-report.json
-      - name: Upload Pretty Report as Artifact
+          curl -X GET -u sqp_b6f45c34804349735cd4a0f84d14d800703e8f90: "http://13.201.109.77:9000//api/cnesreport/report?key=test&format=pdf" --output cnes-report.pdf
+
+      - name: Upload CNES Report
         uses: actions/upload-artifact@v3
         with:
-          name: pretty-sonarqube-report
-          path: pretty-sonarqube-report.json
+          name: cnes-report
+          path: cnes-report.pdf
           
       - name: Send email on success or failure
         if: always()  # ensures that this step runs no matter what
@@ -53,4 +49,4 @@ jobs:
           to: ${{ secrets.RECIPIENT_EMAIL }}
           from: ${{ secrets.SMTP_USERNAME }}
           secure: true
-          attachments: pretty-sonarqube-report.json
+          attachments: cnes-report.pdf
