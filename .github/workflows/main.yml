@@ -1,0 +1,39 @@
+name: CI with Email Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Your build/test steps go here (e.g., SonarQube, testing, etc.)
+      # ...
+
+    # Always send the email regardless of the outcome
+      - name: Send email on success or failure
+        if: always()  # ensures that this step runs no matter what
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: 465
+          username: ${{ secrets.SMTP_USERNAME }}
+          subject: "GitHub Action Pipeline Status - ${{ job.status }}"
+          body: |
+            The GitHub Action for your project has completed.
+          
+            Status: ${{ job.status }} 
+            Commit: ${{ github.sha }}
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+
+            Check the details at: ${{ github.server_url }}/{{ github.repository }}/actions/runs/${{ github.run_id }}
+          to: ${{ secrets.RECIPIENT_EMAIL }}
+          from: ${{ secrets.SMTP_USERNAME }}
+          secure: true
