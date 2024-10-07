@@ -34,7 +34,7 @@ jobs:
             Repository: ${{ github.repository }}
             Workflow: ${{ github.workflow }}
 
-            Check the details at: ${{ github.server_url }}/{{ github.repository }}/actions/runs/${{ github.run_id }}
+            Check the details at: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           to: ${{ secrets.RECIPIENT_EMAIL }}
           from: ${{ secrets.SMTP_USERNAME }}
           secure: true
