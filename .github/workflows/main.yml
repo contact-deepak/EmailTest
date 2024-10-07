@@ -20,7 +20,7 @@ jobs:
 
       - name: Download CNES Report
         run: |
-          curl -X GET -u sqp_b6f45c34804349735cd4a0f84d14d800703e8f90: "http://13.201.109.77:9000//api/cnesreport/report?key=test&format=docx" --output cnes-report.docx
+          curl -X GET -u sqp_b6f45c34804349735cd4a0f84d14d800703e8f90: "http://13.201.109.77:9000/api/cnesreport/report?language=en_US&author=Administrator&token=squ_d147a03a1e7b6e5fd2b7e738b69eb392bd316b12&key=test&branch=main&enableDocx=true" --output cnes-report.docx
 
       - name: Upload CNES Report
         uses: actions/upload-artifact@v3
