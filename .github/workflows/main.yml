@@ -21,10 +21,10 @@ jobs:
         if: always()  # ensures that this step runs no matter what
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: ${{ secrets.SMTP_SERVER }}
+          server_address: ${{ secrets.SMTP_SERVER }}   # smtp.gmail.com
           server_port: 465
           username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
+          password: ${{ secrets.SMTP_PASSWORD }}      # app password from google account
           subject: "GitHub Action Pipeline Status - ${{ job.status }}"
           body: |
             The GitHub Action for your project has completed.
