@@ -24,6 +24,7 @@ jobs:
           server_address: ${{ secrets.SMTP_SERVER }}
           server_port: 465
           username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
           subject: "GitHub Action Pipeline Status - ${{ job.status }}"
           body: |
             The GitHub Action for your project has completed.
