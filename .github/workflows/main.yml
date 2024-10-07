@@ -53,4 +53,4 @@ jobs:
           to: ${{ secrets.RECIPIENT_EMAIL }}
           from: ${{ secrets.SMTP_USERNAME }}
           secure: true
-          attachments: sonarqube-report.json 
+          attachments: pretty-sonarqube-report.json
